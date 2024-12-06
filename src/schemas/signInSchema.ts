@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const signInSchema = z.object(
     {
-        indentifier : z.string(),
+        useraname : z.string(),
         password : z.string(),
     }
 )
