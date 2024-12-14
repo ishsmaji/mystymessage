@@ -106,7 +106,7 @@ function userDashboard(){
   // Handle switch change
   const handleSwitchChange = async () => {
     try {
-      const response = await axios.post<ApiResponse>('/api/accept-messages', {
+      const response = await axios.post<ApiResponse>('/api/accept-message', {
         acceptMessages: !acceptMessages,
       });
       setValue('acceptMessages', !acceptMessages);
