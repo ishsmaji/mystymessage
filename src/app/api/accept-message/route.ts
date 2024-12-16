@@ -82,12 +82,14 @@ export async function GET() {
           { status: 404 }
         );
       }
+
+      console.log("Hey iiiiii", foundUser)
   
       // Return the user's message acceptance status
       return Response.json(
         {
           success: true,
-          isAcceptingMessage: foundUser.isAcceptatingMessage,
+          isAcceptingMessage: foundUser.isAcceptingMessage,
         },
         { status: 200 }
       );

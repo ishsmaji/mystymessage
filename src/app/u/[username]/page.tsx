@@ -40,7 +40,6 @@ export default function SendMessage() {
   const params = useParams<{ username: string }>();
   const username = params.username;
   
-  
   const [suggestedMessages, setSuggestedMessages] = useState<string[]>(DEFAULT_MESSAGES);
   const [isSuggestLoading, setIsSuggestLoading] = useState(false);
   const [suggestError, setSuggestError] = useState('');
@@ -97,37 +96,41 @@ export default function SendMessage() {
   };
 
   return (
-    <div className="container mx-auto my-8 p-6 bg-white rounded max-w-4xl">
-      <h1 className="text-4xl font-bold mb-6 text-center">
+    <div className="container mx-auto px-4 py-6 sm:px-6 lg:px-8 max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-center">
         Public Profile Link
       </h1>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
           <FormField
             control={form.control}
             name="content"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Send Anonymous Message to @{username}</FormLabel>
+                <FormLabel className="text-sm sm:text-base">Send Anonymous Message to @{username}</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Write your anonymous message here"
-                    className="resize-none"
+                    className="resize-none w-full text-sm sm:text-base"
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs sm:text-sm" />
               </FormItem>
             )}
           />
           <div className="flex justify-center">
             {isLoading ? (
-              <Button disabled>
+              <Button disabled className="w-full sm:w-auto">
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Please wait
               </Button>
             ) : (
-              <Button type="submit" disabled={isLoading || !messageContent}>
+              <Button 
+                type="submit" 
+                disabled={isLoading || !messageContent} 
+                className="w-full sm:w-auto"
+              >
                 Send It
               </Button>
             )}
@@ -135,11 +138,11 @@ export default function SendMessage() {
         </form>
       </Form>
 
-      <div className="space-y-4 my-8">
+      <div className="space-y-4 my-6 sm:my-8">
         <div className="space-y-2">
           <Button
             onClick={fetchSuggestedMessages}
-            className="my-4"
+            className="w-full sm:w-auto my-4"
             disabled={isSuggestLoading}
           >
             {isSuggestLoading ? (
@@ -151,21 +154,21 @@ export default function SendMessage() {
               'Suggest Messages'
             )}
           </Button>
-          <p>Click on any message below to select it.</p>
+          <p className="text-sm text-center sm:text-left">Click on any message below to select it.</p>
         </div>
-        <Card>
+        <Card className="w-full">
           <CardHeader>
-            <h3 className="text-xl font-semibold">Messages</h3>
+            <h3 className="text-lg sm:text-xl font-semibold">Messages</h3>
           </CardHeader>
-          <CardContent className="flex flex-col space-y-4">
+          <CardContent className="flex flex-col space-y-2 sm:space-y-4">
             {suggestError ? (
-              <p className="text-red-500">{suggestError}</p>
+              <p className="text-red-500 text-sm sm:text-base">{suggestError}</p>
             ) : (
               suggestedMessages.map((message, index) => (
                 <Button
                   key={index}
                   variant="outline"
-                  className="mb-2"
+                  className="w-full text-xs sm:text-sm"
                   onClick={() => handleMessageClick(message)}
                 >
                   {message}
@@ -175,11 +178,11 @@ export default function SendMessage() {
           </CardContent>
         </Card>
       </div>
-      <Separator className="my-6" />
+      <Separator className="my-4 sm:my-6" />
       <div className="text-center">
-        <div className="mb-4">Get Your Message Board</div>
+        <div className="mb-4 text-sm sm:text-base">Get Your Message Board</div>
         <Link href={'/sign-up'}>
-          <Button>Create Your Account</Button>
+          <Button className="w-full sm:w-auto">Create Your Account</Button>
         </Link>
       </div>
     </div>
