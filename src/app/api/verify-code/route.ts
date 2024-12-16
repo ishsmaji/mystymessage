@@ -1,7 +1,6 @@
 import dbConncet from "@/lib/dbConnect";
 import UserModel from "@/model/User";
-import { json } from "stream/consumers";
-import { date } from "zod";
+
 
 export async function POST(request:Request) {
     await dbConncet();
